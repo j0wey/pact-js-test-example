@@ -1,0 +1,69 @@
+{
+  "consumer": {
+    "name": "GUI"
+  },
+  "interactions": [
+    {
+      "description": "a request to load a list of existing products",
+      "providerStates": [
+        {
+          "name": "there are already some products in the database"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/product/graphql"
+      },
+      "response": {
+        "body": {
+          "data": {
+            "product": {
+              "data": [
+                {
+                  "idProduct": 1,
+                  "name": "My Product"
+                }
+              ]
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {}
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "10.1.0"
+    },
+    "pactRust": {
+      "ffi": "0.2.4",
+      "models": "0.3.1"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "Product Service"
+  }
+}
